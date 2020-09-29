@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+import Login from './components/login.jsx';
 
 class App extends Component {
 	render () {
 		return (
-			<div>hello world</div>
+			<div>
+				<div>hello world</div>
+				<Login />
+			</div>
 		)
 	}
 }
