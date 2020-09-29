@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Login from './components/login.jsx';
+import GameDisplay from './components/gameDisplay.jsx';
 
 class App extends Component {
 	render () {
@@ -7,6 +8,7 @@ class App extends Component {
 			<div>
 				<div>hello world</div>
 				<Login />
+				<GameDisplay />
 			</div>
 		)
 	}

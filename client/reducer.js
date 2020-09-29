@@ -1,19 +1,19 @@
 import * as types from './actions/actionTypes.js'
 
 function reducer (state = { usersList: [], round: 0 }, action) {
-	let usersList;
+	let newUsersList;
 
 	switch (action.type) {
 		case types.ADD_USER:
 			const userStats = {
-				username: newUser,
+				username: action.payload,
 				score: 0,
 			}
-			usersList = state.usersList.slice()
-			userList.push(userStats)
+			newUsersList = state.usersList.slice()
+			newUsersList.push(userStats)
 			return {
 				...state,
-				usersList,
+				usersList: newUsersList,
 			};
 
 		case types.ADD_POINT:

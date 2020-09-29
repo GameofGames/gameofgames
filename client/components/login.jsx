@@ -3,23 +3,31 @@ import { connect } from 'react-redux';
 import * as actions from '../actions/actions.js';
 
 
+const mapStateToProps = (state) => ({
+	usersList: state.usersList
+});
 const mapDispatchToProps = (dispatch) => ({
 	addUsername: (newUser) => dispatch(actions.addUser(newUser)),
 });
 
-//function to grab the value (username) from the input box upon submit 
-//update global store with those usernames 
 
-const Login = () => {
-	return (
-		<div>
-			<form>
-				<label for="exampleInputEmail1">Enter Username</label>
-				<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter username here"></input>
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</form>
-		</div>
-	)
-}
+const Login = (props) => (
 
-export default connect(mapDispatchToProps)(Login);
+	// 	const handleChange = (e) => {
+	// 	console.log(e)
+	// 	// props.addUsername(e.target.value);
+	// 	alert("clicked")
+	// }
+
+	//function to grab the value (username) from the input box upon submit 
+	//update global store with those usernames 
+
+	// Grabbing the input database ID and updating local state
+	<div>
+		<input type="text" id="username" placeholder="Enter username here" />
+		<button key={'button1'} onClick={() => props.addUsername(document.querySelector('#username').value)}>Submit</button>
+		{/* <button key={'button1'} onClick={handleChange}>Submit</button> */}
+	</div>
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
