@@ -4,8 +4,8 @@ const app = express();
 const cookieParser = require('cookie-parser');
 // const cors = require('cors');
 // const fetch = require("node-fetch");
-const http = require('http').createServer(app); // wraps http over express server
-const io = require('socket.io')(http); // makes a socket instance using http
+const http = require('http').createServer(app); 				// wraps http over express server
+const io = require('socket.io')(http); 									// makes a socket instance using http
 
 const PORT = 3000;
 
@@ -22,16 +22,15 @@ app.get('/', (req, res) => {
 
 // special 'connection' and 'disconnect' events
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  // console.log('a user connected');
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    // console.log('user disconnected');
   });
 
   // when client sends a msg
   socket.on('msg', (msg) => {
     console.log('message: ' + msg);
-    // emits a BROADCAST to all connected sockets
-    io.emit('chat message', msg)
+    io.emit('chat message', msg)								// emits a BROADCAST to all connected sockets
   });
 
   socket.on('user', (user) => { 

@@ -4,42 +4,21 @@ import io from 'socket.io-client';
 
 function MessageBoard(props) {
 
-  const socket = io.connect('http://localhost:3000');
-  console.log(socket)
-  socket.on('msg', 'hello')
+  const socket = io.connect('http://localhost:3000');       // defaults to window.location but since we are on 8080 we set to 3000
 
   const clickHandler = (e) => {
-    e.preventDefault();
-    const value = document.getElementById('m').value;
-    console.log(value);
-    socket.emit('msg', value);
-    document.getElementById('m').value = ''
+    e.preventDefault();                                     // prevents screen from reloading
+    const value = document.getElementById('m').value;       // the message that is input 
+    socket.emit('msg', value);                              // emits message to server
+    document.getElementById('m').value = ''                 // then clear out input field
   }
-  socket.on('chat message', function (msg) {
+
+  socket.on('chat message', function (msg) {                // listening for server broadcasts whenever someone sends a message
     const messages = document.querySelector('#messages');
-    const text = document.createElement('li')
+    const text = document.createElement('li')               //then create a list item to append to chat box with the new message
     text.innerText = `${msg}`;
-    messages.appendChild(text);
+    messages.appendChild(text); 
   })
-
-  // const form = document.querySelector('form');
-  // form.addEventListener('submit', (e) => {
-  //     e.preventDefault();
-  //     socket.emit('msg', e.target.value);
-  //     document.querySelector('#m').value = '';
-  //     return false;
-  // });
-  // $('form').submit(function(e) {
-  //   e.preventDefault(); // prevents page reloading
-  //   // emitting event called 'chat message' from this socket
-  //   socket.emit('msg', $('#m').val());
-  //   $('#m').val('');
-  //   return false;
-  // });
-  // socket.on('chat message', function(msg){
-  //   $('#messages').append($('<li>').text(msg));
-  // });
-
 
   return (
     <div>
