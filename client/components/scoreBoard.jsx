@@ -1,17 +1,15 @@
 import React from "react";
-import { connect } from 'react-redux';
 
-
-const mapStateToProps = (state) => ({
-	usersList: state.usersList,
-});
+// const mapStateToProps = (state) => ({
+// 	usersList: state.usersList,
+// });
 
 //function to grab the value (username) from the input box upon submit 
 //update global store with those usernames 
 
 // Grabbing the input database ID and updating local state
 
-const GameDisplay = (props) => {
+const ScoreBoard = (props) => {
 	let newUserName = [];
 	for (let i = 0; i < props.usersList.length; i++) {
 		console.log("props.userList", props.usersList)
@@ -30,4 +28,4 @@ const GameDisplay = (props) => {
 	)
 }
 
-export default connect(mapStateToProps)(GameDisplay);
+export default ScoreBoard;
