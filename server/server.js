@@ -27,7 +27,7 @@ io.on('connection', (socket) => {
     // console.log('user disconnected');
   });
 
-  // when client sends a msg
+  // listens for when client sends a msg
   socket.on('msg', (msg) => {
     console.log('message: ' + msg);
     io.emit('chat message', msg)								// emits a BROADCAST to all connected sockets
