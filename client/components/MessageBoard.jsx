@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import io from 'socket.io-client';
 
 
-const answer = 'cat'
 
 function MessageBoard(props) {
+  const answer = props.word
                                                             //* REMEMBER to grab the answer passed down from the end of the URL to check against user submission */
   const socket = io.connect('http://localhost:3000');       // defaults to window.location but since we are on 8080 we set to 3000
 
