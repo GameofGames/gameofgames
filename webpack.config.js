@@ -7,7 +7,7 @@ module.exports = {
 		publicPath: '/build/',
 		filename: 'bundle.js'
 	},
-	mode: 'production',
+	mode: process.env.NODE_ENV,
 	devServer: {
 		contentBase: path.join(__dirname, 'client'),
 		publicPath: '/build/',
