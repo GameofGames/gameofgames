@@ -15,3 +15,8 @@ export const addPoint = (index) => ({
 	type: types.ADD_POINT,
 	payload: index,
 });
+
+export const addWord = (word) => ({
+	type: types.ADD_WORD,
+	payload: word,
+})

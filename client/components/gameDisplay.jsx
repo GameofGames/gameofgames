@@ -1,33 +1,40 @@
-import React from "react";
-import { connect } from 'react-redux';
+//where the zoomed in pictures will be displayed, switching it out every 1 minute to a new picture
 
-
-const mapStateToProps = (state) => ({
-	usersList: state.usersList,
-});
-
-//function to grab the value (username) from the input box upon submit 
-//update global store with those usernames 
-
-// Grabbing the input database ID and updating local state
+import React, { useState, useEffect } from "react";
 
 const GameDisplay = (props) => {
-	let newUserName = [];
-	for (let i = 0; i < props.usersList.length; i++) {
-		console.log("props.userList", props.usersList)
-		newUserName.push(<h1 key={i}>{props.usersList[i].username}</h1>)
-		console.log("newUserName", newUserName)
-		console.log("props.usersList[i].username", props.usersList[i].username)
+	const [newPic, setNewPic] = useState();
+	// const [word, setNewWord] = useState();
+
+	const wordsArr = ["man", "dog", "cat", "japan", "map", "car", "bear", "city", "brush", "water"]
+	// const wordsArr = ['fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit']
+	let urlLink
+
+	function wordToStore () {
+		let wordToUse = wordsArr[Math.floor((Math.random() * 10))]
+		props.addWord(wordToUse)
+		urlLink = `https://source.unsplash.com/random/900×700/?${wordToUse}`
+		return;
 	}
-	// newUserName.push(props.usersList[0].username)
-	// console.log(newUserName)
+
+	useEffect(() => {
+		wordToStore()
+		fetch(urlLink)
+			.then((response) => {
+				console.log("we are in the fetch response", response)
+				let picture = response.url
+				console.log("picture", picture)
+				setNewPic(picture)
+			})
+	}, [])
 
 	return (
 		<div>
-			<h4>User List Goes Here</h4>
-			{newUserName}
+			<h3>Display Game</h3>
+			{/* <button onClick={() => setNewPic(picture)}>click me</button> */}
+			<img src={newPic} />
 		</div>
 	)
 }
 
-export default connect(mapStateToProps)(GameDisplay);
+export default GameDisplay
