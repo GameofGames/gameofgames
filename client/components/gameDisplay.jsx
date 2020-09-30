@@ -7,36 +7,58 @@ const GameDisplay = (props) => {
 	// const [word, setNewWord] = useState();
 
 	const wordsArr = ["man", "dog", "cat", "japan", "map", "car", "bear", "city", "brush", "water"]
-	// const wordsArr = ['fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit']
+
 	let urlLink
+	let cache = {}
 
 	function wordToStore () {
-		let wordToUse = wordsArr[Math.floor((Math.random() * 10))]
-		props.addWord(wordToUse)
-		urlLink = `https://source.unsplash.com/random/900×700/?${wordToUse}`
-		fetch(urlLink)
-			.then((response) => {
-				console.log("we are in the fetch response", response)
-				let picture = response.url
-				console.log("picture", picture)
-				setNewPic(picture)
-			})	}
+		let wordToUse = wordsArr[Math.floor((Math.random() * 6))]
+		console.log(wordToUse)
 
-	// useEffect(() => {
-	// 	// fetch(urlLink)
-	// 	// 	.then((response) => {
-	// 	// 		console.log("we are in the fetch response", response)
-	// 	// 		let picture = response.url
-	// 	// 		console.log("picture", picture)
-	// 	// 		setNewPic(picture)
-	// 	// 	})
-	// }, [])
+		//cache to make sure that the pictures do not repeat itself
+		if (!cache[wordToUse]) {
+			cache[wordToUse] = 1;
+			props.addWord(wordToUse)
+			urlLink = `https://source.unsplash.com/random/1200×1000/?${wordToUse}`
+			fetch(urlLink)
+				.then((response) => {
+					console.log("we are in the fetch response", response)
+					let picture = response.url
+					console.log("picture", picture)
+					setNewPic(picture)
+				})
+			console.log(cache)
+		} else {
+			wordToStore()
+		}
+	}
+
+	const styleSheet = {
+		// "width": "100px",
+		// "height": "100px",
+		// "position": "absolute"
+		"position": 'absolute',
+		"clip": "rect(200px, 600px, 600px, 200px)",
+	}
+
+	function startPicture () {
+		let numTimes = 0;
+		let interval = setInterval(function () {
+			wordToStore()
+
+			numTimes += 1
+
+			if (numTimes === 4) {
+				clearInterval(interval)
+			}
+		}, 4000)
+	}
 
 	return (
 		<div>
 			<h3>Display Game</h3>
-			<button onClick={wordToStore}>click me</button>
-			<img src={newPic} />
+			<button onClick={startPicture}>click me</button>
+			<div style={styleSheet}><img src={newPic} /></div>
 		</div>
 	)
 }
