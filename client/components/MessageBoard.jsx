@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import io from 'socket.io-client';
 
-const MessageBoard= React.memo((props) => {
 	const answer = props.word
 	const socket = io.connect('http://localhost:3000');       // defaults to window.location but since we are on 8080 we set to 3000
 
