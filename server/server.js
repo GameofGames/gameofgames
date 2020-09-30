@@ -9,6 +9,9 @@ const io = require('socket.io')(http); 									// makes a socket instance using
 
 const PORT = 3000;
 
+const userController = require('./controllers/userController');
+const gameController = require('./controllers/gameController');
+
 app.use(cookieParser());
 app.use(express.json());
 // app.use(cors({ credentials: true, origin: "http://localhost:8080" }));
@@ -28,16 +31,28 @@ io.on('connection', (socket) => {
 		// console.log('user disconnected');
 	});
 
-	// listens for when client sends a msg
+	// listens for when client SENDS MESSAGE
 	socket.on('msg', (msg) => {
-		console.log('message: ' + msg);
 		io.emit('chat message', msg)								// emits a BROADCAST to all connected sockets
 	});
 
+
+	// NEW USERS SIGNING ON
 	socket.on('user', (user) => {
-		io.emit('newUser', user)
-		console.log(user);
+		const userList = userController.addUser(user);
+		if (userList.length > 0) {
+			gameController.lobby(io)
+			// gameController.cron()
+			// console.log('here')
+		}
+		io.emit('userList', userList)
 	})
+
+	// GAME LOGIC
+	socket.on('start game', (gameStarted) => {
+		io.emit('started game', gameStarted)
+	})
+
 });
 
 //Handles all unknown URLs
