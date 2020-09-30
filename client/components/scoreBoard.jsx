@@ -9,15 +9,15 @@ import React from "react";
 
 // Grabbing the input database ID and updating local state
 
-const ScoreBoard = (props) => {
+const ScoreBoard = React.memo((props) => {
 
 
 
 	let newUserName = [];
 	for (let i = 0; i < props.usersList.length; i++) {
-		console.log("props.userList", props.usersList)
+		// console.log("props.userList", props.usersList)
 		newUserName.push(<h1 key={i}>{props.usersList[i].username} : {props.usersList[i].score}</h1>)
-		console.log("newUserName", newUserName)
+		// console.log("newUserName", newUserName)
 		console.log("props.usersList[i].username", props.usersList[i].username)
 	}
 	// newUserName.push(props.usersList[0].username)
@@ -29,6 +29,6 @@ const ScoreBoard = (props) => {
 			{newUserName}
 		</div>
 	)
-}
+})
 
 export default ScoreBoard;
