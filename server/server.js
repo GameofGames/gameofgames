@@ -10,6 +10,7 @@ const io = require('socket.io')(http); 									// makes a socket instance using
 const PORT = 3000;
 
 const userController = require('./controllers/userController');
+const gameController = require('./controllers/gameController');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -30,21 +31,28 @@ io.on('connection', (socket) => {
 		// console.log('user disconnected');
 	});
 
-
-
-	// listens for when client sends a msg
+	// listens for when client SENDS MESSAGE
 	socket.on('msg', (msg) => {
 		io.emit('chat message', msg)								// emits a BROADCAST to all connected sockets
 	});
 
-  // listens for new users
+
+	// NEW USERS SIGNING ON
 	socket.on('user', (user) => {
-    // some logic to add user to listOfUsers.
-    const userList = userController.addUser(user);
-    // console.log(userList);
+		const userList = userController.addUser(user);
+		if (userList.length > 0) {
+			gameController.lobby(io)
+			// gameController.cron()
+			// console.log('here')
+		}
 		io.emit('userList', userList)
-		// console.log(user);
 	})
+
+	// GAME LOGIC
+	socket.on('start game', (gameStarted) => {
+		io.emit('started game', gameStarted)
+	})
+
 });
 
 //Handles all unknown URLs
