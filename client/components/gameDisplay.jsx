@@ -14,24 +14,28 @@ const GameDisplay = (props) => {
 		let wordToUse = wordsArr[Math.floor((Math.random() * 10))]
 		props.addWord(wordToUse)
 		urlLink = `https://source.unsplash.com/random/900×700/?${wordToUse}`
-		return;
-	}
-
-	useEffect(() => {
-		wordToStore()
 		fetch(urlLink)
 			.then((response) => {
 				console.log("we are in the fetch response", response)
 				let picture = response.url
 				console.log("picture", picture)
 				setNewPic(picture)
-			})
-	}, [])
+			})	}
+
+	// useEffect(() => {
+	// 	// fetch(urlLink)
+	// 	// 	.then((response) => {
+	// 	// 		console.log("we are in the fetch response", response)
+	// 	// 		let picture = response.url
+	// 	// 		console.log("picture", picture)
+	// 	// 		setNewPic(picture)
+	// 	// 	})
+	// }, [])
 
 	return (
 		<div>
 			<h3>Display Game</h3>
-			{/* <button onClick={() => setNewPic(picture)}>click me</button> */}
+			<button onClick={wordToStore}>click me</button>
 			<img src={newPic} />
 		</div>
 	)
