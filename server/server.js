@@ -38,21 +38,13 @@ io.on('connection', (socket) => {
 
 
 	// NEW USERS SIGNING ON
-	socket.on('user', (user) => {
+	socket.on('user', async (user) => {
 		const userList = userController.addUser(user);
-		if (userList.length > 0) {
-			gameController.lobby(io)
-			// gameController.cron()
-			// console.log('here')
+		if (userList.length >= 4) {
+      io.emit('start game', {word,uri});
 		}
 		io.emit('userList', userList)
 	})
-
-	// GAME LOGIC
-	socket.on('start game', (gameStarted) => {
-		io.emit('started game', gameStarted)
-	})
-
 });
 
 //Handles all unknown URLs
