@@ -9,6 +9,8 @@ const io = require('socket.io')(http); 									// makes a socket instance using
 
 const PORT = 3000;
 
+const userController = require('./controllers/userController');
+
 app.use(cookieParser());
 app.use(express.json());
 // app.use(cors({ credentials: true, origin: "http://localhost:8080" }));
@@ -34,9 +36,13 @@ io.on('connection', (socket) => {
 		io.emit('chat message', msg)								// emits a BROADCAST to all connected sockets
 	});
 
+  // listens for new users
 	socket.on('user', (user) => {
-		io.emit('newUser', user)
-		console.log(user);
+    // some logic to add user to listOfUsers.
+    const userList = userController.addUser(user);
+    // console.log(userList);
+		io.emit('userList', userList)
+		// console.log(user);
 	})
 });
 

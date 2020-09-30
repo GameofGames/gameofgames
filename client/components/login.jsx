@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addUsername: (newUser) => dispatch(actions.addUser(newUser)),
+	updateUsers: (userList) => dispatch(actions.updateUsers(userList)),
 });
 
 
@@ -30,13 +30,12 @@ const Login = (props) => {
 	const clickHandler = (e) => {
 		e.preventDefault();
 		const username = document.querySelector('#username').value
-		// props.addUsername(username)
-		socket.emit('user', username)
+		socket.emit('user', {username, score:0, socket: socket.id})
 	}
 
-	socket.on('newUser', (username) => {
-		console.log('hit');
-		props.addUsername(username)
+	socket.on('userList', (userList) => {
+		console.log(userList);
+		props.updateUsers(userList)
 	})
 
 	return (
