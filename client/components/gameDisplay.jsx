@@ -7,9 +7,12 @@ const GameDisplay = (props) => {
 	const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });       // defaults to window.location but since we are on 8080 we set to 3000
 
 	const [newPic, setNewPic] = useState();
-	// const [word, setNewWord] = useState();
+	const [word, setWord] = useState();
+	const [uri, setURI] = useState();
 
 	const wordsArr = ["man", "dog", "cat", "japan", "map", "car", "bear", "city", "brush", "water"]
+
+
 
 	let urlLink
 	let cache = {}
@@ -61,8 +64,9 @@ const GameDisplay = (props) => {
 	return (
 		<div>
 			<h3>Display Game</h3>
-			<button onClick={startPicture}>click me</button>
-			<div style={styleSheet}><img src={newPic} /></div>
+				{}
+			{/* <button onClick={startPicture}>click me</button> */}
+			{/* <div style={styleSheet}><img src={newPic} /></div> */}
 		</div>
 	)
 }
