@@ -22,20 +22,22 @@ app.get('/', (req, res) => {
 
 // special 'connection' and 'disconnect' events
 io.on('connection', (socket) => {
-  // console.log('a user connected');
-  socket.on('disconnect', () => {
-    // console.log('user disconnected');
-  });
+	socket.removeAllListeners()
+	// console.log('a user connected');
+	socket.on('disconnect', () => {
+		// console.log('user disconnected');
+	});
 
-  // listens for when client sends a msg
-  socket.on('msg', (msg) => {
-    console.log('message: ' + msg);
-    io.emit('chat message', msg)								// emits a BROADCAST to all connected sockets
-  });
+	// listens for when client sends a msg
+	socket.on('msg', (msg) => {
+		console.log('message: ' + msg);
+		io.emit('chat message', msg)								// emits a BROADCAST to all connected sockets
+	});
 
-  socket.on('user', (user) => { 
-    //  put into SQL db.
-  })
+	socket.on('user', (user) => {
+		io.emit('newUser', user)
+		console.log(user);
+	})
 });
 
 //Handles all unknown URLs

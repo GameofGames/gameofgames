@@ -10,6 +10,9 @@ import React from "react";
 // Grabbing the input database ID and updating local state
 
 const ScoreBoard = (props) => {
+
+
+
 	let newUserName = [];
 	for (let i = 0; i < props.usersList.length; i++) {
 		console.log("props.userList", props.usersList)
