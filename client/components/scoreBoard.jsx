@@ -18,7 +18,7 @@ const ScoreBoard = React.memo((props) => {
 		// console.log("props.userList", props.usersList)
 		newUserName.push(<h1 key={i}>{props.usersList[i].username} : {props.usersList[i].score}</h1>)
 		// console.log("newUserName", newUserName)
-		console.log("props.usersList[i].username", props.usersList[i].username)
+		// console.log("props.usersList[i].username", props.usersList[i].username)
 	}
 	// newUserName.push(props.usersList[0].username)
 	// console.log(newUserName)

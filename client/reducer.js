@@ -4,13 +4,8 @@ function reducer (state = { usersList: [], round: 0, word: '' }, action) {
 	let newUsersList;
 
 	switch (action.type) {
-		case types.ADD_USER:
-			const userStats = {
-				username: action.payload,
-				score: 0,
-			}
-			newUsersList = state.usersList.slice()
-			newUsersList.push(userStats)
+		case types.UPDATE_USERS:
+			newUsersList = action.payload;
 			return {
 				...state,
 				usersList: newUsersList,

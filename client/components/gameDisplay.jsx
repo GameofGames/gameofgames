@@ -1,8 +1,11 @@
 //where the zoomed in pictures will be displayed, switching it out every 1 minute to a new picture
 
 import React, { useState, useEffect } from "react";
+import io from 'socket.io-client';
 
 const GameDisplay = (props) => {
+	const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });       // defaults to window.location but since we are on 8080 we set to 3000
+
 	const [newPic, setNewPic] = useState();
 	// const [word, setNewWord] = useState();
 
@@ -11,7 +14,7 @@ const GameDisplay = (props) => {
 	let urlLink
 	let cache = {}
 
-	function wordToStore () {
+	function wordToStore() {
 		let wordToUse = wordsArr[Math.floor((Math.random() * 6))]
 		console.log(wordToUse)
 
@@ -41,7 +44,7 @@ const GameDisplay = (props) => {
 		"clip": "rect(200px, 600px, 600px, 200px)",
 	}
 
-	function startPicture () {
+	function startPicture() {
 		let numTimes = 0;
 		let interval = setInterval(function () {
 			wordToStore()
@@ -53,6 +56,7 @@ const GameDisplay = (props) => {
 			}
 		}, 4000)
 	}
+
 
 	return (
 		<div>

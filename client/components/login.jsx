@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addUsername: (newUser) => dispatch(actions.addUser(newUser)),
+	updateUsers: (userList) => dispatch(actions.updateUsers(userList)),
 });
 
 
@@ -24,19 +24,18 @@ const Login = (props) => {
 	//update global store with those usernames 
 
 	// Grabbing the input database ID and updating local 
-	const socket = io.connect('http://localhost:3000');       // defaults to window.location but since we are on 8080 we set to 3000
+	const socket = io.connect('http://localhost:3000', { transports: ['websocket'] });       // defaults to window.location but since we are on 8080 we set to 3000
 
 
 	const clickHandler = (e) => {
 		e.preventDefault();
 		const username = document.querySelector('#username').value
-		// props.addUsername(username)
-		socket.emit('user', username)
+		socket.emit('user', { username, score: 0, socket: socket.id })
 	}
 
-	socket.on('newUser', (username) => {
-		console.log('hit');
-		props.addUsername(username)
+	socket.on('userList', (userList) => {
+		// console.log(userList);
+		props.updateUsers(userList)
 	})
 
 	return (
