@@ -24,7 +24,6 @@ gameController.startGame = (io) => {
     urlLink = `https://source.unsplash.com/random/1200×1000/?${wordToUse}`;
     io.emit("pass word", wordToUse);
     io.emit("pass url", urlLink);
-    console.log(cache);
   } else {
     gameController.startGame(io);
   }

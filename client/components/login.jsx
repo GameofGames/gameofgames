@@ -23,7 +23,6 @@ const Login = (props) => {
 
 	useEffect(()=> {
 		socket.on("userList", (userList) => {
-			console.log(userList);
 			props.updateUsers(userList);
 		});
 	})

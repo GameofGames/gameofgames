@@ -15,7 +15,6 @@ useEffect(() => {
   });
 
   socket.off('pass url').on("pass url", (value) => {
-    console.log("URL", value);
     setURI(value);
 	});
 
