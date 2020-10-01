@@ -38,7 +38,7 @@ io.on("connection", (socket) => {
   // NEW USERS SIGNING ON
   socket.on("user", (user) => {
     const userList = userController.addUser(user);
-    if (userList.length > 4) {
+    if (userList.length >= 4) {
       //invoke the function to fetch the random pic from uri link, send that uri and word to the front end, and store it in state
       gameController.startGame(io);
     }

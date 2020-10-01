@@ -70,6 +70,9 @@
   border-color: #8ddbe0;
   background-color: #e5fcf5;
   height: 600px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .top {

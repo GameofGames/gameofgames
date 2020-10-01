@@ -32,7 +32,11 @@ const GameDisplay = React.memo((props) => {
 
   if (winner) {
     return (
-    <h1>WINNER IS {winner.username}</h1>
+      <div className='gameDisplay'>
+        <h3>WINNER IS: </h3>
+        <h1>{winner.username}</h1>
+        <img src='https://media1.giphy.com/media/cOtvwSHKaFK3Ul1VVu/giphy.gif'></img>
+      </div>
     )
   }
   if (!winner) {
