@@ -16,7 +16,7 @@ const MessageBoard = React.memo((props) => {
       socket.emit("nextPic", true);
       socket.emit("updateUserPoint", props.curUser);
     }
-    socket.emit("msg", value); // emits message to server
+    socket.emit("msg", {name: props.curUser,value}); // emits message to server
     document.getElementById("m").value = ""; // then clear out input field
   };
 
