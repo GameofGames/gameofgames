@@ -23,8 +23,9 @@ const MessageBoard = React.memo((props) => {
     socket.on("chat message", function (msg) {
       // listening for server broadcasts whenever someone sends a message
       const messages = document.querySelector("#messages");
-      const text = document.createElement("li"); //then create a list item to append to chat box with the new message
+      const text = document.createElement("div"); //then create a list item to append to chat box with the new message
       text.innerText = `${msg}`;
+      text.classList.add("testMessage");
       messages.appendChild(text);
     });
   }, []);
@@ -35,19 +36,21 @@ const MessageBoard = React.memo((props) => {
       <div className="testing">
         <h4 className="columnTitle">Message Board</h4>
 
-        <ul id="messages" className="messages"></ul>
+        <h4 id="messages" className="messages1"></h4>
       </div>
-      <form className="inputMessage">
-        <input id="m" placeholder="Enter Your Answer" />
-        <button
-          className="send"
-          onClick={(e) => {
-            clickHandler(e);
-          }}
-        >
-          Send
-        </button>
-      </form>
+      <div className="innerMessage">
+        <form className="inputMessage">
+          <input id="m" placeholder="Enter Your Answer" />
+          <button
+            className="send"
+            onClick={(e) => {
+              clickHandler(e);
+            }}
+          >
+            Send
+          </button>
+        </form>
+      </div>
     </div>
   );
 });
