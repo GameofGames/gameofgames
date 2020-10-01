@@ -32,7 +32,8 @@ io.on("connection", (socket) => {
 
   // listens for when client SENDS MESSAGE
   socket.on("msg", (msg) => {
-    io.emit("chat message", msg); // emits a BROADCAST to all connected sockets
+    let message = `${msg.name}: ${msg.value}`
+    io.emit("chat message", message); // emits a BROADCAST to all connected sockets
   });
 
   // NEW USERS SIGNING ON
