@@ -1,44 +1,40 @@
 //where the zoomed in pictures will be displayed, switching it out every 1 minute to a new picture
 
 import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
 
-const GameDisplay = (props) => {
-	const [newPic, setNewPic] = useState();
-	// const [word, setNewWord] = useState();
 
-	const wordsArr = ["man", "dog", "cat", "japan", "map", "car", "bear", "city", "brush", "water"]
-	// const wordsArr = ['fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit', 'fruit']
-	let urlLink
+const GameDisplay = React.memo((props) => {
+  const [uri, setURI] = useState();
+  
+  const socket = io.connect("http://localhost:3000", {
+    transports: ["websocket"],
+  }); // defaults to window.location but since we are on 8080 we set to 3000
 
-	function wordToStore () {
-		let wordToUse = wordsArr[Math.floor((Math.random() * 10))]
-		props.addWord(wordToUse)
-		urlLink = `https://source.unsplash.com/random/900×700/?${wordToUse}`
-		fetch(urlLink)
-			.then((response) => {
-				console.log("we are in the fetch response", response)
-				let picture = response.url
-				console.log("picture", picture)
-				setNewPic(picture)
-			})	}
+  socket.on("pass word", (value) => {
+    console.log("WORD", value);
+    props.addWord(value);
+  });
 
-	// useEffect(() => {
-	// 	// fetch(urlLink)
-	// 	// 	.then((response) => {
-	// 	// 		console.log("we are in the fetch response", response)
-	// 	// 		let picture = response.url
-	// 	// 		console.log("picture", picture)
-	// 	// 		setNewPic(picture)
-	// 	// 	})
-	// }, [])
+  socket.on("pass url", (value) => {
+    console.log("URL", value);
+    setURI(value);
+  });
 
-	return (
-		<div>
-			<h3>Display Game</h3>
-			<button onClick={wordToStore}>click me</button>
-			<img src={newPic} />
-		</div>
-	)
-}
+  const styleSheet = {
+    position: "absolute",
+    clip: "rect(200px, 600px, 600px, 200px)",
+  };
 
-export default GameDisplay
+  return (
+    <div className="gameDisplay">
+      <h4 className="columnTitle"> Guess This Picture</h4>
+      <img className="picture" src={uri}></img>
+      {/* <div style={styleSheet}>
+        <img src={uri} />
+      </div> */}
+    </div>
+  );
+});
+
+export default GameDisplay;

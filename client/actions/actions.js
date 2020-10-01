@@ -1,8 +1,8 @@
 import * as types from './actionTypes.js';
 
-export const addUser = (newUser) => ({
-	type: types.ADD_USER,
-	payload: newUser,
+export const updateUsers = (userList) => ({
+	type: types.UPDATE_USERS,
+	payload: userList,
 });
 
 // add more action creators
@@ -19,4 +19,9 @@ export const addPoint = (index) => ({
 export const addWord = (word) => ({
 	type: types.ADD_WORD,
 	payload: word,
+})
+
+export const setCurUser = (username) => ({
+	type: types.SET_CUR_USER,
+	payload: username,
 })
