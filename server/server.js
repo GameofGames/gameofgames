@@ -25,7 +25,6 @@ app.get("/", (req, res) => {
 
 // special 'connection' and 'disconnect' events
 io.on("connection", (socket) => {
-  // socket.removeAllListeners()
   // console.log('a user connected');
   socket.on("disconnect", () => {
     // console.log('user disconnected');
@@ -33,13 +32,11 @@ io.on("connection", (socket) => {
 
   // listens for when client SENDS MESSAGE
   socket.on("msg", (msg) => {
-    console.log("messageeeeee");
     io.emit("chat message", msg); // emits a BROADCAST to all connected sockets
   });
 
   // NEW USERS SIGNING ON
   socket.on("user", (user) => {
-    console.log("HELPPPP");
     const userList = userController.addUser(user);
     if (userList.length >= 4) {
       //invoke the function to fetch the random pic from uri link, send that uri and word to the front end, and store it in state
