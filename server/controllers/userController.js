@@ -13,20 +13,21 @@ userController.addUser = (user) => {
 	return JSON.parse(fs.readFileSync(db))
 };
 
-userController.addPoint = (username) => {
-	console.log("inside addPoint", username);
+userController.addPoint = (username, io) => {
 	let userList = JSON.parse(fs.readFileSync(db))
 
-	let newUserList = userList.map((user) => {
-		if(user.username === username){
+	for (let user of userList) {
+		if (user.username == username) {
 			user.score += 1;
+			if (user.score >= 5) {
+				console.log('winner is ', user);
+				// return the userlist but also emit WINNER
+				io.emit('winner', user)
+			}
+			break;
 		}
-	console.log("user is", user)
-	return user;
-	});
-	
-	
-	fs.writeFileSync(db, JSON.stringify(newUserList))
+	}
+	fs.writeFileSync(db, JSON.stringify(userList))
 	return JSON.parse(fs.readFileSync(db));
 };
 
