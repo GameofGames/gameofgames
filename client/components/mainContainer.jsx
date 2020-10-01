@@ -12,7 +12,8 @@ import * as actions from '../actions/actions'
 const mapStateToProps = (state) => ({
   usersList: state.usersList,
   round: state.round,
-  word: state.word
+  word: state.word,
+  curUser: state.curUser
 });
 const mapDispatchToProps = dispatch => ({
   addPoint: index => dispatch(actions.addPoint(index)),
@@ -30,7 +31,7 @@ class MainContainer extends Component {
       <div className="mainContainer">
         <ScoreBoard usersList= {this.props.usersList}/>
         <GameDisplay round= {this.props.round} addRound={this.props.addRound} word= {this.props.word} addWord={this.props.addWord}/>
-        <MessageBoard word={this.props.word} addPoint={this.props.addPoint}/>
+        <MessageBoard curUser={this.props.curUser} word={this.props.word} addPoint={this.props.addPoint}/>
       </div>
     )
   }

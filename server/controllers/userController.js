@@ -13,7 +13,16 @@ userController.addUser = (user) => {
     return JSON.parse(fs.readFileSync(db))
 };
 
-
+userController.addPoint = (username) => {
+    console.log("inside addPoint", username);
+    let userList = JSON.parse(fs.readFileSync(db))
+    
+    // const person = userList.find((user) => user.username === username);
+    // console.log(person);
+    
+    // // fs.writeFileSync(db, JSON.stringify(userList));
+    // return JSON.parse(fs.readFileSync(db))
+};
 
 
 
