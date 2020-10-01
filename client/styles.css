@@ -36,14 +36,23 @@
   flex-wrap: wrap;
 }
 
-.inputMessage {
+.innerMessage {
   align-self: flex-end;
   /* justify-content: center;
   align-content: center;
   align-items: center;
   text-align: center; */
+
   margin-bottom: 10px;
   margin-left: 20px;
+}
+
+.inputMessage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 }
 
 #m {
@@ -71,6 +80,9 @@
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
+
+  align-items: center;
+  align-content: center;
 }
 
 .columnTitle {
@@ -94,3 +106,38 @@
   margin-bottom: 10px;
   margin-left: 30px;
 } */
+
+.userFont {
+  color: green;
+  margin: 30px;
+}
+
+.messages1 {
+  width: 90%;
+
+  height: 400px;
+}
+
+.testMessage {
+  align-self: flex-end;
+  border-style: solid;
+  border-color: #5fc9f8;
+  widows: 80px;
+  margin: 10px;
+  border-radius: 25px;
+  background-color: #5fc9f8;
+  padding-left: 5px;
+}
+
+.individualPlayer {
+  border-style: solid;
+  border-color: #5bc236;
+  background-color: #5bc236;
+  border-radius: 25px;
+  padding-left: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 15px;
+
+  color: black;
+}
