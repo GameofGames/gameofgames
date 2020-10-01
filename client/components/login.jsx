@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	updateUsers: (userList) => dispatch(actions.updateUsers(userList)),
+	setCurUser: (username) => dispatch(actions.setCurUser(username))
 });
 
 
@@ -30,11 +31,12 @@ const Login = (props) => {
 	const clickHandler = (e) => {
 		e.preventDefault();
 		const username = document.querySelector('#username').value
+		props.setCurUser(username)
 		socket.emit('user', { username, score: 0, socket: socket.id })
 	}
 
 	socket.on('userList', (userList) => {
-		// console.log(userList);
+		console.log(userList);
 		props.updateUsers(userList)
 	})
 

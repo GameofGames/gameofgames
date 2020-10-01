@@ -1,22 +1,26 @@
 const gameController = {};
 
-// gameController.lobby = async (io) => {
-// 	console.log('in LOBBY');
-// 	// logic to count down timer
-// 	let sec = 10
-// 	await setTimeout(function () {
-// 		console.log('in SET INTERVAL');
-// 		io.emit('lobby', sec)
-// 		sec -= 1
-// 		if (sec === 0) {
-// 			// io.emit('start game', true)// logic to start game
-// 		}
-//   }, 3000)
-//   console.log('3')
-// };
+const wordsArr = ["man", "dog", "cat", "japan", "map", "car", "bear", "city", "brush", "water"]
+	let urlLink
+	let cache = {}
 
-gameController.placeholder = () => {
 
+gameController.startGame = (io) => {
+	let wordToUse = wordsArr[Math.floor((Math.random() * wordsArr.length))]
+	console.log(wordToUse)
+	//cache to make sure that the pictures do not repeat itself
+	if (!cache[wordToUse]) {
+		cache[wordToUse] = 1;
+	
+		urlLink = `https://source.unsplash.com/random/1200×1000/?${wordToUse}`
+
+    io.emit('pass word', wordToUse);
+    io.emit('pass url', urlLink);
+		console.log(cache)
+  }
+  else {
+    gameController.startGame();
+  }
 };
 
 

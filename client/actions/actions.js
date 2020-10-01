@@ -20,3 +20,8 @@ export const addWord = (word) => ({
 	type: types.ADD_WORD,
 	payload: word,
 })
+
+export const setCurUser = (username) => ({
+	type: types.SET_CUR_USER,
+	payload: username,
+})

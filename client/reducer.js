@@ -1,6 +1,6 @@
 import * as types from './actions/actionTypes.js'
 
-function reducer (state = { usersList: [], round: 0, word: '' }, action) {
+function reducer (state = { usersList: [], curUser: '', round: 0, word: '' }, action) {
 	let newUsersList;
 
 	switch (action.type) {
@@ -35,6 +35,13 @@ function reducer (state = { usersList: [], round: 0, word: '' }, action) {
 			return {
 				...state,
 				word: newWord,
+			}
+
+		case types.SET_CUR_USER:
+			const newCurUser = action.payload
+			return {
+				...state,
+				curUser: newCurUser,
 			}
 
 		default:
