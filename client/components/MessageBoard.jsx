@@ -3,7 +3,7 @@ import socket from '../socket'
 
 const MessageBoard = React.memo((props) => {
   const answer = props.word;
-
+  
   const clickHandler = (e) => {
     e.preventDefault(); // prevents screen from reloading
     let value = document.getElementById("m").value; // the message that is input
