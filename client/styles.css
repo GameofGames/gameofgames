@@ -73,6 +73,9 @@
   border-color: white;
   background-color: #e5fcf5;
   height: 600px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   margin: 5px;
   border-radius: 25px;
   box-shadow: 5px 10px 8px #888888;

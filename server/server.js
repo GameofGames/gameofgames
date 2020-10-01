@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("updateUserPoint", (username) => {
-    const userList = userController.addPoint(username);
+    const userList = userController.addPoint(username,io);
     io.emit("userList", userList);
   });
 });
