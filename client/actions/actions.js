@@ -5,7 +5,6 @@ export const updateUsers = (userList) => ({
 	payload: userList,
 });
 
-// add more action creators
 export const addRound = (roundNum) => ({
 	type: types.ADD_ROUND,
 	payload: roundNum,

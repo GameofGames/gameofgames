@@ -1,9 +1,11 @@
 import React, { useEffect, Component } from "react";
-import io from "socket.io-client";
+import socket from '../socket'
 
-const socket = io.connect("http://localhost:3000", {
-  transports: ["websocket"],
-}); // defaults to window.location but since we are on 8080 we set to 3000
+// import io from "socket.io-client";
+
+// const socket = io.connect("http://localhost:3000", {
+//   transports: ["websocket"],
+// }); // defaults to window.location but since we are on 8080 we set to 3000
 
 const MessageBoard = React.memo((props) => {
   const answer = props.word;
@@ -33,6 +35,7 @@ const MessageBoard = React.memo((props) => {
       messages.appendChild(text);
     });
   }, []);
+
 
   return (
     <div className="messageBoard">
