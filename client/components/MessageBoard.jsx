@@ -1,9 +1,10 @@
 import React, { useEffect, Component } from "react";
-import socket from '../socket'
+import socket from "../socket";
+// const chatMessages = document.getElementsByClassName("messages1");
 
 const MessageBoard = React.memo((props) => {
   const answer = props.word;
-  
+
   const clickHandler = (e) => {
     e.preventDefault(); // prevents screen from reloading
     let value = document.getElementById("m").value; // the message that is input
@@ -23,14 +24,14 @@ const MessageBoard = React.memo((props) => {
     socket.on("chat message", function (msg) {
       // listening for server broadcasts whenever someone sends a message
       const messages = document.querySelector("#messages");
-      const text = document.createElement("div"); //then create a list item to append to chat box with the new message
+      const text = document.createElement("div"); //then create a lxist item to append to chat box with the new message
       text.innerText = `${msg}`;
       text.classList.add("testMessage");
       messages.appendChild(text);
     });
   }, []);
 
-
+  // chatMessages.scrollTop = chatMessages.scrollHeight;
   return (
     <div className="messageBoard">
       <div className="testing">

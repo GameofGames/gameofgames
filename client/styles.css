@@ -18,14 +18,17 @@
   width: 20%;
   border-style: solid;
 
-  border-color: #8ddbe0;
+  border-color: white;
+  border-radius: 25px;
 
   height: 600px;
+  margin: 5px;
+  box-shadow: 5px 10px 8px #888888;
 }
 
-/* .scoreBoard {
-  background-color: ;
-} */
+.scoreBoard {
+  background-color: #8ddbe0;
+}
 
 .messageBoard {
   background-color: #b3dec1;
@@ -67,12 +70,15 @@
   min-width: 600px;
   width: 60%;
   border-style: solid;
-  border-color: #8ddbe0;
+  border-color: white;
   background-color: #e5fcf5;
   height: 600px;
   align-items: center;
   display: flex;
   flex-direction: column;
+  margin: 5px;
+  border-radius: 25px;
+  box-shadow: 5px 10px 8px #888888;
 }
 
 .top {
@@ -119,6 +125,12 @@
   width: 90%;
 
   height: 400px;
+  /* display: flex; */
+  overflow: scroll;
+  /* flex-direction: column-reverse; */
+  /* overflow-y: scroll;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: y proximity; */
 }
 
 .testMessage {
