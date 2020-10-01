@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 
 // special 'connection' and 'disconnect' events
 io.on('connection', (socket) => {
-	socket.removeAllListeners()
+	// socket.removeAllListeners()
 	// console.log('a user connected');
 	socket.on('disconnect', () => {
 		// console.log('user disconnected');

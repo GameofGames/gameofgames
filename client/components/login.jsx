@@ -36,7 +36,7 @@ const Login = (props) => {
 	}
 
 	socket.on('userList', (userList) => {
-		// console.log(userList);
+		console.log(userList);
 		props.updateUsers(userList)
 	})
 
