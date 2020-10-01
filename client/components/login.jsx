@@ -30,13 +30,14 @@ const Login = (props) => {
 	const clickHandler = (e) => {
 		e.preventDefault();
 		const username = document.querySelector('#username').value
-		// props.addUsername(username)
 		socket.emit('user', username)
 	}
 
 	socket.on('newUser', (username) => {
 		console.log('hit');
-		props.addUsername(username)
+		// props.addUsername(username)
+		console.log(username);
+		console.log('end')
 	})
 
 	return (
