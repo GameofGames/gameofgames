@@ -12,6 +12,7 @@ const mapStateToProps = (state) => ({
   usersList: state.usersList,
   round: state.round,
   word: state.word,
+  curUser: state.curUser,
 });
 const mapDispatchToProps = (dispatch) => ({
   addPoint: (index) => dispatch(actions.addPoint(index)),
@@ -27,16 +28,15 @@ class MainContainer extends Component {
   render() {
     return (
       <div className="mainContainer">
-        <ScoreBoard className="scoreBoard" usersList={this.props.usersList} />
+        <ScoreBoard usersList={this.props.usersList} />
         <GameDisplay
-          className="gamedisplay"
           round={this.props.round}
           addRound={this.props.addRound}
           word={this.props.word}
           addWord={this.props.addWord}
         />
         <MessageBoard
-          className="messageBoard"
+          curUser={this.props.curUser}
           word={this.props.word}
           addPoint={this.props.addPoint}
         />

@@ -20,13 +20,10 @@ const GameDisplay = React.memo((props) => {
     setURI(value);
   });
 
-  // const styleSheet = {
-  //   position: "absolute",
-  //   // clip: "rect(200px, 600px, 600px, 200px)",
-  //   width: "100%",
-  //   height: "100%",
-  //   contain: "auto",
-  // };
+  const styleSheet = {
+    position: "absolute",
+    clip: "rect(200px, 600px, 600px, 200px)",
+  };
 
   return (
     <div className="gameDisplay">
