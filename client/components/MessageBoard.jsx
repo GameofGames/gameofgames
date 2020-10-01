@@ -1,13 +1,8 @@
 import React, { useEffect, Component } from "react";
-import io from "socket.io-client";
-
+import socket from '../socket'
 
 const MessageBoard = React.memo((props) => {
   const answer = props.word;
-  
-  const socket = io.connect("http://localhost:3000", {
-    transports: ["websocket"],
-  }); // defaults to window.location but since we are on 8080 we set to 3000
   
   const clickHandler = (e) => {
     e.preventDefault(); // prevents screen from reloading
@@ -27,13 +22,13 @@ const MessageBoard = React.memo((props) => {
   useEffect(() => {
     socket.on("chat message", function (msg) {
       // listening for server broadcasts whenever someone sends a message
-      console.log("message received");
       const messages = document.querySelector("#messages");
       const text = document.createElement("li"); //then create a list item to append to chat box with the new message
       text.innerText = `${msg}`;
       messages.appendChild(text);
     });
   }, []);
+
 
   return (
     <div className="messageBoard">
